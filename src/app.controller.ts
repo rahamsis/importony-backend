@@ -8,12 +8,27 @@ import { Response } from 'express';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get('/backendApi/new-products')
+  @Get('/backendApi/features-products')
   async getNewProduct(
+    @Query('feature') feature: number,
     @Res() res: Response,
   ) {
     try {
-      const data = await this.appService.getNewProduct();
+      const data = await this.appService.getNewProduct(feature);
+
+      return res.status(HttpStatus.OK).json(data);
+    } catch (error) {
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
+    }
+  }
+
+  @Get('/backendApi/product-by-category')
+  async getProductByCategory(
+    @Query('category') category: string,
+    @Res() res: Response,
+  ) {
+    try {
+      const data = await this.appService.getProductByCategory(category);
 
       return res.status(HttpStatus.OK).json(data);
     } catch (error) {
