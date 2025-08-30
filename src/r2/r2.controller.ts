@@ -1,12 +1,14 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { R2Service } from './r2.service';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('/backendApi/catalogos')
+@ApiTags('catalogos')
+@Controller('catalogos')
 export class R2Controller {
   constructor(private readonly r2: R2Service) {}
 
   // GET /pdfs -> lista con URLs firmadas (ver y descargar)
-  @Get()
+  @Get('all-catalogos')
   async list() {
     const items = await this.r2.listAllPdfs();
     const withUrls = await Promise.all(items.map(async (f) => {
