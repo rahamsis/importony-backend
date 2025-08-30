@@ -1,7 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { R2Service } from './r2.service';
 
-@Controller('catalogos')
+@Controller('/backendApi/catalogos')
 export class R2Controller {
   constructor(private readonly r2: R2Service) {}
 
