@@ -8,7 +8,7 @@ export class R2Controller {
   constructor(private readonly r2: R2Service) {}
 
   // GET /pdfs -> lista con URLs firmadas (ver y descargar)
-  @Get('all-catalogos')
+  @Get('/all-catalogos')
   async list() {
     const items = await this.r2.listAllPdfs();
     const withUrls = await Promise.all(items.map(async (f) => {
